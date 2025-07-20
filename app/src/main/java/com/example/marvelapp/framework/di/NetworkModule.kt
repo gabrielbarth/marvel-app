@@ -27,14 +27,16 @@ object NetworkModule {
         }
     }
 
+    private const val TIMEOUT_SECONDS = 15
+
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .build()
     }
 
